@@ -1,73 +1,81 @@
-# React + TypeScript + Vite
+# BitPulse
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project overview
+BitPulse is a React + TypeScript dashboard that tracks Bitcoin price data in real time using CoinGecko.
+It includes mock authentication, protected routes, responsive charting, and a clean light/dark UI.
 
-Currently, two official plugins are available:
+## Features
+- Mock login/logout flow with persisted auth state
+- Protected dashboard route
+- Live Bitcoin price polling (60-second interval)
+- Price history caching (last 50 points)
+- Recharts-based responsive line chart
+- Loading and error states with retry UI
+- Light/dark mode with persisted preference
+- Route-level code splitting for improved bundle performance
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech stack
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS v4
+- React Router
+- Zustand
+- Recharts
 
-## React Compiler
+## Setup instructions
+### Prerequisites
+- Node.js 20+
+- npm 10+
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Install dependencies
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Start development server
+```bash
+npm run dev
 ```
+
+### Build for production
+```bash
+npm run build
+```
+
+### Preview production build
+```bash
+npm run preview
+```
+
+## Architecture
+The project follows a feature-oriented structure with shared app and UI layers:
+
+```text
+src/
+  app/              # Router and top-level providers
+  components/
+    common/         # Shared non-domain components (theme toggle, etc.)
+    ui/             # Reusable presentation components
+  features/
+    btc/
+      hooks/        # Bitcoin data hooks
+      services/     # CoinGecko API layer
+      types/        # Feature types
+  pages/            # Route pages (Login, Dashboard)
+  routes/           # Route guards (ProtectedRoute)
+  store/            # Global Zustand stores (auth)
+  utils/            # Utility hooks/helpers
+```
+
+Data flow (dashboard):
+- `api` service fetches BTC data from CoinGecko
+- `useBitcoinData` handles polling, history, loading, and errors
+- Dashboard page composes reusable UI cards and chart
+
+## Screenshots
+Place screenshots in this section once available.
+
+- Login page screenshot: `[placeholder]`
+- Dashboard page screenshot: `[placeholder]`
+- Dark mode dashboard screenshot: `[placeholder]`
