@@ -1,5 +1,8 @@
 # BitPulse
 
+# Live Repo
+https://github.com/Bluuefanatic/bitpulse
+
 ## Project overview
 BitPulse is a React + TypeScript dashboard that tracks Bitcoin price data in real time using CoinGecko.
 It includes mock authentication, protected routes, responsive charting, and a clean light/dark UI.
@@ -74,8 +77,12 @@ Data flow (dashboard):
 - Dashboard page composes reusable UI cards and chart
 
 ## Screenshots
-Place screenshots in this section once available.
 
-- Login page screenshot: `[placeholder]`
-- Dashboard page screenshot: `[placeholder]`
-- Dark mode dashboard screenshot: `[placeholder]`
+### Login Page
+![Login page screenshot](login.png)
+
+### Dashboard Page
+![Dashboard page screenshot](dashboard.png)
+
+### Dark Mode
+![Dark mode dashboard screenshot](darkmode.png)
