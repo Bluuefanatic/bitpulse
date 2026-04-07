@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react'
 import type { ReactNode } from 'react'
-import { createBrowserRouter } from 'react-router-dom'
+import { Navigate, createBrowserRouter } from 'react-router-dom'
 import App from '../App'
 import ProtectedRoute from '../routes/ProtectedRoute'
 
@@ -26,6 +26,10 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       {
+        path: '/',
+        element: <Navigate replace to="/dashboard" />,
+      },
+      {
         path: '/login',
         element: withSuspense(<Login />),
       },
@@ -33,7 +37,7 @@ export const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
           {
-            path: '/',
+            path: '/dashboard',
             element: withSuspense(<Dashboard />),
           },
         ],

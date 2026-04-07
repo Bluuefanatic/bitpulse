@@ -13,7 +13,7 @@ function Login() {
   const [error, setError] = useState<string | null>(null)
 
   if (isAuthenticated) {
-    return <Navigate replace to="/" />
+    return <Navigate replace to="/dashboard" />
   }
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -29,7 +29,7 @@ function Login() {
       email: email.trim(),
     })
 
-    navigate('/', { replace: true })
+    navigate('/dashboard', { replace: true })
   }
 
   return (
