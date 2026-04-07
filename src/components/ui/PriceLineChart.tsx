@@ -64,6 +64,11 @@ function PriceLineChart({ data, height = 320, className }: PriceLineChartProps) 
             tickFormatter={(value: number) => formatCurrency(value)}
           />
           <Tooltip
+            contentStyle={{
+              borderRadius: 10,
+              border: '1px solid rgb(148 163 184 / 0.35)',
+              boxShadow: '0 8px 24px rgba(15, 23, 42, 0.12)',
+            }}
             formatter={(value) => {
               const numericValue = typeof value === 'number' ? value : Number(value ?? 0)
               return formatCurrency(numericValue)
@@ -79,7 +84,8 @@ function PriceLineChart({ data, height = 320, className }: PriceLineChartProps) 
             stroke="#f59e0b"
             strokeWidth={2.5}
             dot={false}
-            isAnimationActive={false}
+            isAnimationActive
+            animationDuration={450}
           />
         </LineChart>
       </ResponsiveContainer>

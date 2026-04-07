@@ -18,3 +18,18 @@ body {
 #root {
   min-height: 100vh;
 }
+
+@keyframes price-flash {
+  0% {
+    transform: translateY(0);
+    opacity: 0.72;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.price-flash {
+  animation: price-flash 0.65s ease;
+}

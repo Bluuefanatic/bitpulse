@@ -18,9 +18,11 @@ function PriceChangeCard({
         : 'text-rose-600 dark:text-rose-400'
 
   return (
-    <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-      <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{title}</p>
-      <p className={`mt-2 text-3xl font-semibold ${toneClass}`}>
+    <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700 dark:bg-slate-900">
+      <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+        {title}
+      </p>
+      <p className={`mt-2 text-3xl font-semibold tracking-tight ${toneClass}`}>
         {changePercent === null
           ? '--'
           : `${isPositive ? '+' : ''}${changePercent.toFixed(2)}%`}

@@ -36,11 +36,11 @@ function Dashboard() {
   }
 
   return (
-    <main className="space-y-6">
-      <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+    <main className="space-y-5 md:space-y-6">
+      <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900 md:p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
+            <h1 className="text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 md:text-3xl">
               Dashboard
             </h1>
             <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
@@ -51,7 +51,7 @@ function Dashboard() {
           <button
             type="button"
             onClick={logout}
-            className="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+            className="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 active:scale-[0.99] dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
           >
             Logout
           </button>
@@ -68,7 +68,7 @@ function Dashboard() {
         />
       </section>
 
-      <ChartCard data={history} title="Bitcoin Price Trend" height={360} />
+      <ChartCard data={history} title="Bitcoin Price Trend" height={350} />
     </main>
   )
 }
