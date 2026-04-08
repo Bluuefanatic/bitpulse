@@ -10,8 +10,9 @@ function ThemeToggle({ isDark, onToggle }: ThemeToggleProps) {
     <button
       type="button"
       onClick={onToggle}
-      className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-300 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+      className="inline-flex h-11 w-11 touch-manipulation select-none items-center justify-center rounded-md border border-slate-300 bg-white text-slate-700 shadow-sm transition active:scale-95 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-1 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 sm:h-10 sm:w-10"
       aria-label={nextModeLabel}
+      aria-pressed={isDark}
       title={nextModeLabel}
     >
       {isDark ? (

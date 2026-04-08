@@ -21,6 +21,10 @@ body {
   min-height: 100vh;
 }
 
+.app-header-safe {
+  padding-top: calc(0.75rem + env(safe-area-inset-top));
+}
+
 @keyframes price-flash {
   0% {
     transform: translateY(0);
