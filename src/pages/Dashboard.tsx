@@ -87,11 +87,10 @@ function Dashboard() {
                 key={option.value}
                 type="button"
                 onClick={() => setRange(option.value)}
-                className={`rounded-md border px-3 py-1.5 text-xs font-semibold transition ${
-                  range === option.value
+                className={`rounded-md border px-3 py-1.5 text-xs font-semibold transition ${range === option.value
                     ? 'border-amber-400 bg-amber-400/20 text-amber-700 dark:border-amber-500 dark:bg-amber-500/20 dark:text-amber-300'
                     : 'border-slate-300 text-slate-600 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800'
-                }`}
+                  }`}
               >
                 {option.label}
               </button>
