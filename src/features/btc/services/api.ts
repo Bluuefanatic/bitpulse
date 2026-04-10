@@ -3,7 +3,7 @@ type BitcoinPriceResponse = {
   timestamp: number
 }
 
-type TimeRange = '1H' | '24H' | '7D' | '30D'
+type TimeRange = '1H' | '24H' | '3D' | '7D'
 
 const COINGECKO_URL =
   'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_last_updated_at=true'
@@ -97,10 +97,10 @@ function getRangeWindowSeconds(range: TimeRange): number {
       return 60 * 60
     case '24H':
       return 24 * 60 * 60
+    case '3D':
+      return 3 * 24 * 60 * 60
     case '7D':
       return 7 * 24 * 60 * 60
-    case '30D':
-      return 30 * 24 * 60 * 60
     default:
       return 24 * 60 * 60
   }

@@ -11,8 +11,8 @@ const POLL_INTERVAL_MS = 60_000
 const RANGE_TO_MS: Record<TimeRange, number> = {
   '1H': 60 * 60 * 1000,
   '24H': 24 * 60 * 60 * 1000,
+  '3D': 3 * 24 * 60 * 60 * 1000,
   '7D': 7 * 24 * 60 * 60 * 1000,
-  '30D': 30 * 24 * 60 * 60 * 1000,
 }
 
 export type BitcoinHistoryEntry = {

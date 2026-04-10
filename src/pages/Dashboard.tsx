@@ -6,8 +6,8 @@ import { useAuthStore } from '../store/authStore'
 const RANGE_OPTIONS: Array<{ label: string; value: TimeRange }> = [
   { label: '1H', value: '1H' },
   { label: '24H', value: '24H' },
+  { label: '3D', value: '3D' },
   { label: '7D', value: '7D' },
-  { label: '30D', value: '30D' },
 ]
 
 function calculateChangePercent(
@@ -88,8 +88,8 @@ function Dashboard() {
                 type="button"
                 onClick={() => setRange(option.value)}
                 className={`rounded-md border px-3 py-1.5 text-xs font-semibold transition ${range === option.value
-                    ? 'border-amber-400 bg-amber-400/20 text-amber-700 dark:border-amber-500 dark:bg-amber-500/20 dark:text-amber-300'
-                    : 'border-slate-300 text-slate-600 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800'
+                  ? 'border-amber-400 bg-amber-400/20 text-amber-700 dark:border-amber-500 dark:bg-amber-500/20 dark:text-amber-300'
+                  : 'border-slate-300 text-slate-600 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800'
                   }`}
               >
                 {option.label}
