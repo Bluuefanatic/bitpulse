@@ -3,6 +3,8 @@ type BitcoinPriceResponse = {
   timestamp: number
 }
 
+type TimeRange = '1H' | '24H' | '7D' | '30D'
+
 const COINGECKO_URL =
   'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_last_updated_at=true'
 
@@ -65,3 +67,82 @@ export async function fetchBitcoinPrice(): Promise<BitcoinPriceResponse> {
     timestamp: timestampInMs,
   }
 }
+
+function isValidHistoryPayload(payload: unknown): payload is {
+  prices: Array<[number, number]>
+} {
+  if (!payload || typeof payload !== 'object') {
+    return false
+  }
+
+  const prices = (payload as Record<string, unknown>).prices
+  if (!Array.isArray(prices)) {
+    return false
+  }
+
+  return prices.every(
+    (entry) =>
+      Array.isArray(entry) &&
+      entry.length >= 2 &&
+      typeof entry[0] === 'number' &&
+      Number.isFinite(entry[0]) &&
+      typeof entry[1] === 'number' &&
+      Number.isFinite(entry[1]),
+  )
+}
+
+function getRangeWindowSeconds(range: TimeRange): number {
+  switch (range) {
+    case '1H':
+      return 60 * 60
+    case '24H':
+      return 24 * 60 * 60
+    case '7D':
+      return 7 * 24 * 60 * 60
+    case '30D':
+      return 30 * 24 * 60 * 60
+    default:
+      return 24 * 60 * 60
+  }
+}
+
+export async function fetchBitcoinHistory(
+  range: TimeRange,
+): Promise<BitcoinPriceResponse[]> {
+  const to = Math.floor(Date.now() / 1000)
+  const from = to - getRangeWindowSeconds(range)
+
+  const url =
+    `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range` +
+    `?vs_currency=usd&from=${from}&to=${to}`
+
+  let response: Response
+
+  try {
+    response = await fetch(url)
+  } catch {
+    throw new Error('Failed to reach CoinGecko API')
+  }
+
+  if (!response.ok) {
+    throw new Error(`CoinGecko API request failed with status ${response.status}`)
+  }
+
+  let payload: unknown
+  try {
+    payload = await response.json()
+  } catch {
+    throw new Error('CoinGecko API returned invalid JSON')
+  }
+
+  if (!isValidHistoryPayload(payload)) {
+    throw new Error('Unexpected CoinGecko response shape')
+  }
+
+  return payload.prices.map(([timestamp, price]) => ({
+    timestamp,
+    price,
+  }))
+}
+
+export type { BitcoinPriceResponse, TimeRange }

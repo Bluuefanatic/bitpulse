@@ -42,6 +42,13 @@ function PriceLineChart({ data, height = 320, className }: PriceLineChartProps) 
       label: formatTime(point.timestamp),
     }))
 
+  const prices = chartData.map((point) => point.price)
+  const minPrice = Math.min(...prices)
+  const maxPrice = Math.max(...prices)
+  const range = maxPrice - minPrice
+  const yPadding = range === 0 ? Math.max(maxPrice * 0.001, 1) : range * 0.12
+  const yDomain: [number, number] = [minPrice - yPadding, maxPrice + yPadding]
+
   if (chartData.length === 0) {
     return (
       <div
@@ -62,12 +69,22 @@ function PriceLineChart({ data, height = 320, className }: PriceLineChartProps) 
             tick={{ fontSize: 12 }}
             width={90}
             tickFormatter={(value: number) => formatCurrency(value)}
+            domain={yDomain}
           />
           <Tooltip
             contentStyle={{
               borderRadius: 10,
               border: '1px solid rgb(148 163 184 / 0.35)',
+              backgroundColor: '#ffffff',
               boxShadow: '0 8px 24px rgba(15, 23, 42, 0.12)',
+            }}
+            labelStyle={{
+              color: '#334155',
+              fontWeight: 600,
+            }}
+            itemStyle={{
+              color: '#b45309',
+              fontWeight: 600,
             }}
             formatter={(value) => {
               const numericValue = typeof value === 'number' ? value : Number(value ?? 0)
